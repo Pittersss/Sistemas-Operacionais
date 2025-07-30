@@ -1,4 +1,5 @@
 import math
+from random import randint
 
 def paging_translation(address_acess: int, address_space: int, physical_address_space: int, page_size: int):
     address_acess_bin = bin(address_acess)[2:] #without prefix 0b
@@ -10,8 +11,6 @@ def paging_translation(address_acess: int, address_space: int, physical_address_
 
     while len(address_acess_bin) != address_size:
         address_acess_bin = "0" + address_acess_bin
-    
-
 
     return type(address_acess_bin)
 
@@ -20,9 +19,18 @@ def generate_table(address_space: int, physical_address_space: int ,page_size: i
     page_table_entrys = number_of_pages
     number_of_pages_frames = physical_address_space/page_size
     page_table_entrys_size = math.log2(number_of_pages_frames)
-
     page_table_size = page_table_entrys * page_table_entrys_size
-    #for i in range(0, int(page_table_entrys_size)):
+    page_table = []
+
+    while(len(page_table) != page_table_size):
+        elem = randint(0,  int(page_table_entrys_size) - 1)
+        if elem not in page_table:
+            size_dif = page_table_entrys_size - len(bin(elem)[2:])
+            if size_dif != 0:
+                page_table.append(("0" * int(size_dif)) + bin(elem)[2:])
+            else:
+                page_table.append(bin(elem)[2:])
+
 
 
 
