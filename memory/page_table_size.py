@@ -17,8 +17,12 @@ def paging_translation(address_acess: int, address_space: int, physical_address_
 
 def generate_table(address_space: int, physical_address_space: int ,page_size: int):
     number_of_pages = address_space/page_size
+    page_table_entrys = number_of_pages
     number_of_pages_frames = physical_address_space/page_size
+    page_table_entrys_size = math.log2(number_of_pages_frames)
 
+    page_table_size = page_table_entrys * page_table_entrys_size
+    #for i in range(0, int(page_table_entrys_size)):
 
 
 
@@ -34,4 +38,4 @@ def calc_page_table_size(address_space: int, page_size: int):
 def calc_page_table_size_adress_size(adress_size: int):
     return
 
-print(calc_page_table_size(64, 16))
+print(generate_table(64,64,16))
